@@ -1,84 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lotbear</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lotbear</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="phone">
-  <section class="scene" id="welcome">
-    <div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div>
-    <div class="hill back"></div><div class="hill front"></div>
-    <div class="forest left"><i></i><i></i><i></i><i></i></div>
-    <div class="forest right"><i></i><i></i><i></i><i></i></div>
-    <div class="content">
-      <div class="logo-wrap"><img src="images/lotbear-logo.png" alt="Lotbear logo"></div>
-      <div class="small-label">YOUR LITTLE COMPANION</div>
-      <h1>Welcome to<br><strong>Lotbear</strong></h1>
-      <p class="tagline">Your little companion<br>for better days.</p>
-      <div class="line"></div>
-      <p class="description">Understand your stress.<br>Take care of your energy.<br>Find your way to recover.</p>
-      <button id="startBtn"><span>Get Started</span><b>→</b></button>
+  <div class="prototype-root">
+<div class="onboarding-layer" id="onboardingLayer">
+  <main class="onboarding-phone">
+    <section class="scene" id="welcome">
+      <div class="sun"></div><div class="cloud c1"></div><div class="cloud c2"></div>
+      <div class="hill back"></div><div class="hill front"></div>
+      <div class="forest left"><i></i><i></i><i></i><i></i></div>
+      <div class="forest right"><i></i><i></i><i></i><i></i></div>
+      <div class="content">
+        <div class="logo-wrap"><img src="assets/lotbear-logo-icon.png" alt="Lotbear logo"></div>
+        <div class="small-label">YOUR LITTLE COMPANION</div>
+        <h1>Welcome to<br><strong>Lotbear</strong></h1>
+        <p class="tagline">Your little companion<br>for better days.</p>
+        <div class="line"></div>
+        <p class="description">Understand your stress.<br>Take care of your energy.<br>Find your way to recover.</p>
+        <button id="startBtn"><span>Get Started</span><b>→</b></button>
+      </div>
+      <div class="ground"></div><span class="flower f1">✿</span><span class="flower f2">✿</span><span class="flower f3">✿</span>
+    </section>
+
+    <div class="onboarding-app">
+      <section class="onboarding-screen intro-screen" id="testIntro">
+        <img class="lotbear-logo" src="assets/lotbear-logo-icon.png" alt="Lotbear logo">
+        <p class="eyebrow">TAKE A MOMENT FOR YOURSELF</p>
+        <h1>Recovery Test</h1>
+        <p class="intro-text">A few gentle questions to help Lotbear understand what helps you recharge.</p>
+        <div class="intro-note"><span>♡</span><div><strong>Only 3 questions</strong><small>There are no right or wrong answers.</small></div></div>
+        <button class="primary intro-button" id="startTest">Let's get started →</button>
+      </section>
+
+      <section class="onboarding-screen question-screen" id="questionWrap">
+        <header class="onboarding-topbar"><button id="back" aria-label="Previous question">←</button><b>Recovery Test</b><span id="count">1 / 3</span></header>
+        <div class="progress"><i id="bar"></i></div>
+        <section class="question-page active"><div class="intro"><small>GET TO KNOW YOURSELF</small><h2>What would you<br>most like to do?</h2><p>When you've had a really stressful week, what would you most like to do?</p></div><div class="options">
+          <button class="option"><em>🌙</em><span><strong>Stay home alone</strong><small>Have some quiet time and do nothing.</small></span><b>✓</b></button>
+          <button class="option"><em>👯</em><span><strong>Meet my friends</strong><small>Talk, eat, laugh and spend some time together.</small></span><b>✓</b></button>
+          <button class="option"><em>🌿</em><span><strong>Go outside</strong><small>Take a walk, explore somewhere or enjoy some fresh air.</small></span><b>✓</b></button>
+          <button class="option custom"><em>🎮</em><span><strong>Do something I enjoy</strong><small>Tell us something you like to do.</small><input type="text" placeholder="Type your answer here..."></span><b>✓</b></button>
+        </div><button class="next" disabled>Next →</button></section>
+
+        <section class="question-page"><div class="intro"><small>GET TO KNOW YOURSELF</small><h2>What do you need<br>from others?</h2><p>When you've had a really stressful week, what would you want from other people?</p></div><div class="options">
+          <button class="option"><em>🤫</em><span><strong>Give me some space</strong><small>I just want some time alone.</small></span><b>✓</b></button>
+          <button class="option"><em>🫂</em><span><strong>Stay with me</strong><small>I don't need to talk. I just don't want to be alone.</small></span><b>✓</b></button>
+          <button class="option"><em>💬</em><span><strong>Talk to me</strong><small>I feel better when I can talk things out.</small></span><b>✓</b></button>
+          <button class="option"><em>😂</em><span><strong>Distract me</strong><small>Make me laugh or help me take my mind off things.</small></span><b>✓</b></button>
+        </div><button class="next" disabled>Next →</button></section>
+
+        <section class="question-page"><div class="intro"><small>GET TO KNOW YOURSELF</small><h2>Where do you feel<br>most relaxed?</h2><p>Where do you usually feel the most relaxed?</p></div><div class="options">
+          <button class="option"><em>🏠</em><span><strong>My room</strong><small>Somewhere quiet and comfortable where I can be myself.</small></span><b>✓</b></button>
+          <button class="option"><em>🌳</em><span><strong>Somewhere outdoors</strong><small>Being surrounded by nature helps me unwind.</small></span><b>✓</b></button>
+          <button class="option"><em>☕</em><span><strong>A café / somewhere outside</strong><small>A cozy place where I can relax and enjoy the atmosphere.</small></span><b>✓</b></button>
+          <button class="option custom"><em>✨</em><span><strong>Somewhere else</strong><small>Tell us your favorite place to relax.</small><input type="text" placeholder="Type your answer here..."></span><b>✓</b></button>
+        </div><button class="next" disabled>Finish ✓</button></section>
+      </section>
+
+      <section class="onboarding-screen complete-screen" id="complete">
+        <div class="complete-icon">✓</div><p class="eyebrow">3 / 3 COMPLETE</p><h2>Thank you for sharing.</h2>
+        <p class="complete-text">Your answers help Lotbear understand how you like to recover.</p>
+        <div class="mini-card"><span>🌱</span><div><strong>Your recovery style is taking shape.</strong><small>Next, let's create a little buddy to go through it with you.</small></div></div>
+        <button class="primary" id="continue">Create my buddy →</button>
+      </section>
+
+      <section class="onboarding-screen buddy-screen" id="buddyPage">
+        <button class="buddy-back" id="buddyBack">← Back</button>
+        <div class="buddy-content"><p class="eyebrow">ONE LAST STEP</p><h2>Create your<br>little buddy</h2>
+        <p class="buddy-text">Your buddy can be anything that makes you feel comfortable — a pet, a plushie, or anything you love.</p>
+        <button class="upload" id="upload" type="button" aria-label="Add your buddy"><div class="upload-placeholder"><span class="upload-icon">＋</span><strong>Tap + to add your buddy</strong><small>For this prototype, we'll use Nagano 🐻</small></div><img class="nagano-preview" src="images/nagano.jpg" alt="Nagano plushie"></button>
+        <label for="buddyName">Buddy name</label><input class="text-input" id="buddyName" value="Nagano">
+        <label for="yourName">Your name</label><input class="text-input" id="yourName" value="Joyce">
+        <button class="primary create-button" id="create">Create Buddy →</button></div>
+      </section>
     </div>
-    <div class="ground"></div><span class="flower f1">✿</span><span class="flower f2">✿</span><span class="flower f3">✿</span>
-  </section>
+  </main>
+</div>
+<div class="main-app-layer" id="mainAppLayer">
+    <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mini">
+        <img src="assets/lotbear-logo-icon.png" alt="Lotbear logo">
+      </div>
+      <div class="level-pill"><span>Level 1</span><span class="star">★</span><span id="stars">120</span></div>
+    </header>
 
-  <div class="app">
-    <section class="screen intro-screen" id="testIntro">
-      <img class="lotbear-logo" src="images/lotbear-logo.png" alt="Lotbear logo">
-      <p class="eyebrow">TAKE A MOMENT FOR YOURSELF</p>
-      <h1>Recovery Test</h1>
-      <p class="intro-text">A few gentle questions to help Lotbear understand what helps you recharge.</p>
-      <div class="intro-note"><span>♡</span><div><strong>Only 3 questions</strong><small>There are no right or wrong answers.</small></div></div>
-      <button class="primary intro-button" id="startTest">Let's get started →</button>
-    </section>
+    <main id="app">
+      <!-- HOME -->
+      <section class="screen active" id="home">
+        <div class="greeting">
+          <h1><span data-i18n="hello">Hello, Joyce!</span> <span>♡</span></h1>
+          <p id="daily-message">Let's take care of you and Nagano today.</p>
+        </div>
 
-    <section class="screen question-screen" id="questionWrap">
-      <header class="topbar"><button id="back" aria-label="Previous question">←</button><b>Recovery Test</b><span id="count">1 / 3</span></header>
-      <div class="progress"><i id="bar"></i></div>
+        <button class="status-card workload-home-card" type="button" onclick="openTodayWorkload()">
+          <div>
+            <span class="status-label" data-i18n="todaysWorkload">TODAY'S WORKLOAD</span>
+            <strong id="workloadText" data-i18n="moderate">Moderate</strong>
+            <p data-i18n="fourTasks">You have 4 tasks today.</p>
+          </div>
+          <div class="meter"><i id="meterFill"></i></div>
+          <span class="status-arrow">›</span>
+        </button>
 
-      <section class="page active"><div class="intro"><small>GET TO KNOW YOURSELF</small><h2>What would you<br>most like to do?</h2><p>When you've had a really stressful week, what would you most like to do?</p></div><div class="options">
-        <button class="option"><em>🌙</em><span><strong>Stay home alone</strong><small>Have some quiet time and do nothing.</small></span><b>✓</b></button>
-        <button class="option"><em>👯</em><span><strong>Meet my friends</strong><small>Talk, eat, laugh and spend some time together.</small></span><b>✓</b></button>
-        <button class="option"><em>🌿</em><span><strong>Go outside</strong><small>Take a walk, explore somewhere or enjoy some fresh air.</small></span><b>✓</b></button>
-        <button class="option custom"><em>🎮</em><span><strong>Do something I enjoy</strong><small>Tell us something you like to do.</small><input type="text" placeholder="Type your answer here..."></span><b>✓</b></button>
-      </div><button class="next" disabled>Next →</button></section>
+        <button class="burnout-card" type="button" onclick="openBurnoutMeter()">
+          <div class="burnout-card-top">
+            <span class="status-label">BURNOUT METER</span>
+            <strong><span id="burnoutScoreCard">82/100</span> · <span id="burnoutLabel">High</span></strong>
+          </div>
+          <div class="burnout-track"><i id="burnoutFillCard" style="width:82%"></i></div>
+          <p><b>Lotbear detected a busy day.</b> You may want to move a few tasks.</p>
+          <span class="burnout-arrow">›</span>
+        </button>
 
-      <section class="page"><div class="intro"><small>GET TO KNOW YOURSELF</small><h2>What do you need<br>from others?</h2><p>When you've had a really stressful week, what would you want from other people?</p></div><div class="options">
-        <button class="option"><em>🤫</em><span><strong>Give me some space</strong><small>I just want some time alone.</small></span><b>✓</b></button>
-        <button class="option"><em>🫂</em><span><strong>Stay with me</strong><small>I don't need to talk. I just don't want to be alone.</small></span><b>✓</b></button>
-        <button class="option"><em>💬</em><span><strong>Talk to me</strong><small>I feel better when I can talk things out.</small></span><b>✓</b></button>
-        <button class="option"><em>😂</em><span><strong>Distract me</strong><small>Make me laugh or help me take my mind off things.</small></span><b>✓</b></button>
-      </div><button class="next" disabled>Next →</button></section>
+        <div class="pet-area">
+          <img class="fuzzy" src="assets/nagano-3d.png" alt="Nagano the bear">
+          <div class="pet-name">Nagano</div>
+          <div class="pet-mood" id="petMood">“I'm here with you.”</div>
+        </div>
 
-      <section class="page"><div class="intro"><small>GET TO KNOW YOURSELF</small><h2>Where do you feel<br>most relaxed?</h2><p>Where do you usually feel the most relaxed?</p></div><div class="options">
-        <button class="option"><em>🏠</em><span><strong>My room</strong><small>Somewhere quiet and comfortable where I can be myself.</small></span><b>✓</b></button>
-        <button class="option"><em>🌳</em><span><strong>Somewhere outdoors</strong><small>Being surrounded by nature helps me unwind.</small></span><b>✓</b></button>
-        <button class="option"><em>☕</em><span><strong>A café / somewhere outside</strong><small>A cozy place where I can relax and enjoy the atmosphere.</small></span><b>✓</b></button>
-        <button class="option custom"><em>✨</em><span><strong>Somewhere else</strong><small>Tell us your favorite place to relax.</small><input type="text" placeholder="Type your answer here..."></span><b>✓</b></button>
-      </div><button class="next" disabled>Finish ✓</button></section>
-    </section>
+        <div class="quick-actions">
+          <button class="action-card" onclick="openFeed()">
+            <span class="action-icon feed-icon mono-icon">♨</span>
+            <span data-i18n="feed">Feed</span>
+            <small data-i18n="careForNagano">Care for Nagano</small>
+          </button>
+          <button class="action-card" onclick="openSleep()">
+            <span class="action-icon moon">☾</span>
+            <span data-i18n="sleep">Sleep</span>
+            <small data-i18n="trackRest">Track rest</small>
+          </button>
+          <button class="action-card" onclick="openDress()">
+            <span class="action-icon dress mono-icon">✿</span>
+            <span data-i18n="dress">Dress</span>
+            <small data-i18n="naganoLook">Nagano's look</small>
+          </button>
+        </div>
 
-    <section class="screen complete-screen" id="complete">
-      <div class="complete-icon">✓</div><p class="eyebrow">3 / 3 COMPLETE</p><h2>Thank you for sharing.</h2>
-      <p class="complete-text">Your answers help Lotbear understand how you like to recover.</p>
-      <div class="mini-card"><span>🌱</span><div><strong>Your recovery style is taking shape.</strong><small>Next, let's create a little buddy to go through it with you.</small></div></div>
-      <button class="primary" id="continue">Create my buddy →</button>
-    </section>
+        <div class="quote-card">
+          <span>♡</span>
+          <div><strong data-i18n="tinyReminder">A tiny reminder</strong><p data-i18n="tinyReminderText">You don't have to finish everything today.</p></div>
+        </div>
+      </section>
 
-    <section class="screen buddy-screen" id="buddyPage">
-      <button class="buddy-back" id="buddyBack">← Back</button>
-      <div class="buddy-content"><p class="eyebrow">ONE LAST STEP</p><h2>Create your<br>little buddy</h2>
-      <p class="buddy-text">Your buddy can be anything that makes you feel comfortable — a pet, a plushie, or anything you love.</p>
-      <button class="upload" id="upload" type="button" aria-label="Add your buddy"><div class="upload-placeholder"><span class="upload-icon">＋</span><strong>Tap + to add your buddy</strong><small>For this prototype, we'll use Nagano 🐻</small></div><img class="nagano-preview" src="images/nagano.jpg" alt="Nagano plushie"></button>
-      <label for="buddyName">Buddy name</label><input class="text-input" id="buddyName" value="Nagano">
-      <label for="yourName">Your name</label><input class="text-input" id="yourName" value="Joyce">
-      <button class="primary create-button" id="create">Create Buddy →</button></div>
-    </section>
+      <!-- SLEEP MODE -->
+      <section class="screen sleep-screen" id="sleepModeScreen">
+        <div class="sleep-mode-content">
+          <div class="sleep-orbit">🌙</div>
+          <p class="eyebrow">SLEEP MODE</p>
+          <h2>Good night, Joyce.</h2>
+          <p>Rest with Nagano. When you're ready, wake up to log your sleep.</p>
+          <div class="sleep-bear-card">
+            <img src="assets/nagano-3d.png" alt="Nagano sleeping with you">
+            <div>
+              <strong>Nagano is sleeping too.</strong>
+              <small>Prototype demo: sleep duration is recorded as 7h for now.</small>
+            </div>
+          </div>
+          <button class="primary wake-button" onclick="wakeUp()">Wake Up</button>
+        </div>
+      </section>
+
+      <!-- CALENDAR -->
+      <section class="screen" id="calendar">
+        <div class="page-head calendar-page-head">
+          <p class="eyebrow">YOUR WORKLOAD</p>
+          <div class="calendar-title-row">
+            <h2 data-i18n="calendar">Calendar</h2>
+            <button type="button" class="add-task-top" onclick="addTask()" data-i18n="addTask">＋ Add task</button>
+          </div>
+          <p data-i18n="seeEnergy">See what is taking up your energy.</p>
+        </div>
+
+        <div class="calendar-card">
+          <div class="month-row">
+            <button type="button" id="prevMonth" onclick="changeMonth(-1)" aria-label="Previous month">‹</button>
+            <strong id="calendarMonth">September 2026</strong>
+            <button type="button" id="nextMonth" onclick="changeMonth(1)" aria-label="Next month">›</button>
+          </div>
+          <div class="weekdays" id="weekdayLabels">
+            <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
+          </div>
+          <div class="days" id="calendarDays"></div>
+        </div>
+
+        <div class="task-list">
+          <div class="section-title">
+            <strong id="selectedDateLabel">Tuesday, 8 Sep</strong>
+          </div>
+          <div id="taskItems"></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section class="screen" id="analytics">
+        <div class="page-head">
+          <p class="eyebrow" data-i18n="yourPatterns">YOUR PATTERNS</p>
+          <h2 data-i18n="analytics">Analytics</h2>
+          <p data-i18n="analyticsDesc">See how your workload affects your energy and recovery.</p>
+        </div>
+
+        <button class="analytics-card workload-card analytics-clickable" onclick="openWeeklyWorkload()">
+          <div class="analytics-card-head"><strong><span data-i18n="weeklyWorkload">WEEKLY WORKLOAD</span></strong><span><span data-i18n="tapExplore">Tap to explore ›</span></span></div>
+          <div class="workload-bars">
+            <div onclick="event.stopPropagation(); openWorkloadDay('Monday', 28)"><i style="height:28%"></i><small>M</small></div>
+            <div onclick="event.stopPropagation(); openWorkloadDay('Tuesday', 48)"><i style="height:48%"></i><small>T</small></div>
+            <div onclick="event.stopPropagation(); openWorkloadDay('Wednesday', 66)"><i style="height:66%"></i><small>W</small></div>
+            <div onclick="event.stopPropagation(); openWorkloadDay('Thursday', 42)"><i style="height:42%"></i><small>T</small></div>
+            <div onclick="event.stopPropagation(); openWorkloadDay('Friday', 78)"><i style="height:78%"></i><small>F</small></div>
+            <div onclick="event.stopPropagation(); openWorkloadDay('Saturday', 34)"><i style="height:34%"></i><small>S</small></div>
+            <div onclick="event.stopPropagation(); openWorkloadDay('Sunday', 22)"><i style="height:22%"></i><small>S</small></div>
+          </div>
+          <div class="analytics-mini-stats"><span><b>18</b> tasks</span><span><b>6</b> high-stress tasks</span></div>
+        </button>
+
+        <button class="analytics-card stress-energy-card analytics-clickable" onclick="openStressEnergy()">
+          <div class="analytics-card-head"><strong data-i18n="stressEnergy">STRESS &amp; ENERGY</strong><span data-i18n="tapExplore">Tap to explore ›</span></div>
+          <div class="dual-bars">
+            <div class="metric-row"><span>Stress</span><b>64/100</b><i><em style="width:64%"></em></i></div>
+            <div class="metric-row"><span>Energy</span><b>57/100</b><i><em style="width:57%"></em></i></div>
+          </div>
+          <p class="analytics-note">Your energy tends to drop after high-stress days.</p>
+        </button>
+
+        <div class="analytics-card recovery-pattern-card">
+          <div class="analytics-card-head"><strong data-i18n="whatHelps">WHAT HELPS YOU RECOVER?</strong><span data-i18n="fromRecoveryTest">From your Recovery Test</span></div>
+          <p class="analytics-subnote">Your first answers help Nagano learn what kind of recovery may fit you best.</p>
+          <div class="recovery-stat"><span class="recovery-icon">🌳</span><div><b>5-minute park walk</b><div class="recovery-meter"><i style="width:82%"></i></div></div><strong>82%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">🍪</span><div><b>Small snack</b><div class="recovery-meter"><i style="width:76%"></i></div></div><strong>76%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">🎧</span><div><b>Listen to music</b><div class="recovery-meter"><i style="width:68%"></i></div></div><strong>68%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">🏠</span><div><b>Quiet time in my room</b><div class="recovery-meter"><i style="width:64%"></i></div></div><strong>64%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">👯</span><div><b>Meet a friend</b><div class="recovery-meter"><i style="width:55%"></i></div></div><strong>55%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">☕</span><div><b>Relax at a café</b><div class="recovery-meter"><i style="width:49%"></i></div></div><strong>49%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">💬</span><div><b>Talk things out</b><div class="recovery-meter"><i style="width:44%"></i></div></div><strong>44%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">🎮</span><div><b>Do something I enjoy</b><div class="recovery-meter"><i style="width:61%"></i></div></div><strong>61%</strong></div>
+          <div class="recovery-stat"><span class="recovery-icon">🤫</span><div><b>Give me some space</b><div class="recovery-meter"><i style="width:72%"></i></div></div><strong>72%</strong></div>
+          <div class="pattern-insight">💡 <span><b>Nagano noticed:</b> You seem to respond best to short outdoor breaks and quiet time when your energy is low.</span></div>
+        </div>
+
+        <div class="analytics-card sleep-analytics-card">
+          <div class="analytics-card-head"><strong>🌙 <span data-i18n="sleep">SLEEP</span></strong><span data-i18n="thisWeek">This week</span></div>
+          <div class="sleep-analytics-main"><strong id="sleepStat">7h</strong><span>Average sleep</span></div>
+          <div class="sleep-week-chart" aria-label="Sleep duration for each day this week">
+            <div class="sleep-day"><span>6h</span><i style="height:60%"></i><small>Mon</small></div>
+            <div class="sleep-day"><span>7h</span><i style="height:70%"></i><small>Tue</small></div>
+            <div class="sleep-day"><span>8h</span><i style="height:80%"></i><small>Wed</small></div>
+            <div class="sleep-day"><span>6h</span><i style="height:60%"></i><small>Thu</small></div>
+            <div class="sleep-day"><span>7h</span><i style="height:70%"></i><small>Fri</small></div>
+            <div class="sleep-day"><span>8h</span><i style="height:80%"></i><small>Sat</small></div>
+            <div class="sleep-day"><span>7h</span><i style="height:70%"></i><small>Sun</small></div>
+          </div>
+          <p class="analytics-note">Your sleep stayed around 6–8 hours this week. You usually feel more energized after 7+ hours.</p>
+        </div>
+      </section>
+
+      <!-- FEED -->
+      <section class="screen" id="feedScreen">
+        <div class="page-head">
+          <button class="back-button" onclick="showScreen('home')">‹ Back</button>
+          <p class="eyebrow">NAGANO'S TREATS</p>
+          <h2>Feed Nagano</h2>
+          <p>Choose a little treat for your companion.</p>
+        </div>
+
+        <div class="feed-preview">
+          <div class="feed-bear-wrap">
+            <img class="feed-bear" src="assets/nagano-3d.png" alt="Nagano">
+          </div>
+          <strong id="feedStatus">Nagano is ready for a treat!</strong>
+          <small>More treats unlock as you level up.</small>
+        </div>
+
+        <div class="feed-grid">
+          <button class="feed-card feed-open" onclick="feedNagano(this)">
+            <span class="feed-preview-icon color-icon">🐟</span>
+            <span><b>Little Fish</b><small>Cost 5 ★</small></span>
+            <span class="unlock-mark">✓</span>
+          </button>
+          <button class="feed-card locked" disabled>
+            <span class="feed-preview-icon mono-icon">🍗</span>
+            <span><b>Chicken Leg</b><small>Unlock at Level 2</small></span>
+            <span class="unlock-mark">🔒</span>
+          </button>
+          <button class="feed-card locked" disabled>
+            <span class="feed-preview-icon mono-icon">🍎</span>
+            <span><b>Apple Bite</b><small>Unlock at Level 3</small></span>
+            <span class="unlock-mark">🔒</span>
+          </button>
+          <button class="feed-card locked" disabled>
+            <span class="feed-preview-icon mono-icon">🥕</span>
+            <span><b>Crunchy Carrot</b><small>Unlock at Level 4</small></span>
+            <span class="unlock-mark">🔒</span>
+          </button>
+          <button class="feed-card locked" disabled>
+            <span class="feed-preview-icon mono-icon">🍪</span>
+            <span><b>Cozy Biscuit</b><small>Unlock at Level 5</small></span>
+            <span class="unlock-mark">🔒</span>
+          </button>
+          <button class="feed-card locked" disabled>
+            <span class="feed-preview-icon mono-icon">🍓</span>
+            <span><b>Berry Snack</b><small>Unlock at Level 6</small></span>
+            <span class="unlock-mark">🔒</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section class="screen" id="profile">
+        <div class="page-head">
+          <p class="eyebrow" data-i18n="yourSpace">YOUR SPACE</p>
+          <h2 data-i18n="profile">Profile</h2>
+          <p data-i18n="profileDesc">Keep your Lotbear settings simple and personal.</p>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-avatar">J</div>
+          <div>
+            <strong>Joyce</strong>
+            <p>Level 1 · <span id="profileStars">120</span> ★</p>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <div class="section-title"><strong data-i18n="preferences">Preferences</strong></div>
+          <button class="profile-row" onclick="openLanguage()">
+            <span class="row-icon">文</span>
+            <span><b data-i18n="language">Language</b><small id="languageCurrent">English</small></span>
+            <span>›</span>
+          </button>
+          <button class="profile-row" onclick="openPersonalityTest()">
+            <span class="row-icon">♡</span>
+            <span><b data-i18n="personalityTest">Personality Test</b><small data-i18n="reviewPreferences">Review your recovery preferences</small></span>
+            <span>›</span>
+          </button>
+        </div>
+
+        <div class="profile-section">
+          <div class="section-title"><strong data-i18n="notifications">Notifications</strong></div>
+          <button class="profile-row" onclick="toggleReminders()">
+            <span class="row-icon">🔔</span>
+            <span><b data-i18n="reminders">Reminders</b><small id="reminderStatus" data-i18n="remindersOn">Gentle reminders are on</small></span>
+            <span id="reminderToggle">●</span>
+          </button>
+          <button class="profile-row" onclick="openNotificationSettings()">
+            <span class="row-icon">★</span>
+            <span><b data-i18n="starNotifications">Star notifications</b><small data-i18n="starNotificationDesc">Show when stars are earned or spent</small></span>
+            <span>›</span>
+          </button>
+        </div>
+
+        <div class="profile-section">
+          <div class="section-title"><strong data-i18n="about">About</strong></div>
+          <div class="profile-row static-row">
+            <span class="row-icon">♡</span>
+            <span><b data-i18n="aboutLotbear">About Lotbear</b><small data-i18n="aboutDesc">Your workload, your recovery, your pace.</small></span>
+            <span>›</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DRESS / CLOSET -->
+      <section class="screen" id="dressScreen">
+        <div class="page-head">
+          <button class="back-button" onclick="showScreen('home')">‹ Back</button>
+          <p class="eyebrow">NAGANO'S CLOSET</p>
+          <h2>Dress Nagano</h2>
+          <p>Pick a look for your little companion.</p>
+        </div>
+
+        <div class="closet-preview">
+          <div class="closet-bear-wrap">
+            <img class="closet-bear" src="assets/nagano-3d.png" alt="Nagano">
+          </div>
+          <strong id="outfitName">Outfits coming soon</strong>
+          <small id="outfitDescription">Reach higher levels to unlock Nagano's closet.</small>
+        </div>
+
+        <div class="outfit-grid">
+          <button class="outfit-card locked-outfit" disabled>
+            <span class="outfit-preview mono-icon">🌿</span>
+            <span><b>Cozy Green</b><small>🔒 Unlock at Level 2</small></span>
+          </button>
+          <button class="outfit-card locked-outfit" disabled>
+            <span class="outfit-preview mono-icon">🎀</span>
+            <span><b>Soft Ribbon</b><small>🔒 Unlock at Level 2</small></span>
+          </button>
+          <button class="outfit-card locked-outfit" disabled>
+            <span class="outfit-preview mono-icon">🎓</span>
+            <span><b>Study Buddy</b><small>🔒 Unlock at Level 3</small></span>
+          </button>
+          <button class="outfit-card locked-outfit" disabled>
+            <span class="outfit-preview mono-icon">🧣</span>
+            <span><b>Warm Scarf</b><small>🔒 Unlock at Level 4</small></span>
+          </button>
+          <button class="outfit-card locked-outfit" disabled>
+            <span class="outfit-preview mono-icon">🌸</span>
+            <span><b>Spring Mood</b><small>🔒 Unlock at Level 5</small></span>
+          </button>
+          <button class="outfit-card locked-outfit" disabled>
+            <span class="outfit-preview mono-icon">☁️</span>
+            <span><b>Cloudy Day</b><small>🔒 Unlock at Level 6</small></span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+        <nav class="bottom-nav">
+      <button class="nav-item active" data-screen="home"><span>⌂</span><small data-i18n="home">Home</small></button>
+      <button class="nav-item" data-screen="calendar"><span>▦</span><small data-i18n="calendar">Calendar</small></button>
+      <button class="nav-item" data-screen="analytics"><span>⌁</span><small data-i18n="analysis">Analysis</small></button>
+      <button class="nav-item" data-screen="profile"><span>♙</span><small data-i18n="profile">Profile</small></button>
+    </nav>
   </div>
-</main>
-<script src="script.js"></script>
+
+  <!-- MODALS -->
+  <div class="modal" id="modal">
+    <div class="modal-box" id="modalContent"></div>
+  </div>
+  <div class="toast" id="toast"></div>
+    </div>
+  </div>
+  </div>
+  <script src="onboarding.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
