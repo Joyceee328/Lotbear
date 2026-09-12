@@ -125,6 +125,7 @@ const weekdayLocales = {
 function t(key){
   return (translations[currentLanguage] && translations[currentLanguage][key]) || translations.en[key] || key;
 }
+
 function applyLanguage(){
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key=el.dataset.i18n;
@@ -152,6 +153,7 @@ function applyLanguage(){
   const avatar=document.querySelector('.profile-avatar');
   if(avatar) avatar.textContent=(userName[0]||'J').toUpperCase();
 }
+
 function setLanguage(lang){
   currentLanguage=lang;
   localStorage.setItem('lotbearLanguage',lang);
@@ -181,16 +183,12 @@ function closeModal(){ modal.classList.remove('show'); }
 modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
 
 function getTodayTasks(){
-  // Prototype demo date: Tuesday, 8 Sep 2026.
-  // Keep the Home workload tied to the same calendar data so moving a task
-  // actually changes today's task count and workload.
   return (calendarTasks['2026-09-08'] || []).filter(t => !t.completed);
 }
 
 function getTodayWorkloadScore(){
   const tasks = getTodayTasks();
   if(!tasks.length) return 8;
-  // Weighted demo score: reflects both number of tasks and their stress.
   const raw = tasks.reduce((sum,t) => sum + Number(t.stress || 0), 0);
   return Math.min(100, Math.round(raw * 0.34 + tasks.length * 4));
 }
@@ -266,25 +264,87 @@ function openFeed(){
   showScreen('feedScreen');
 }
 
-function feedNagano(button){
-  stars = Math.max(0, stars - 5);
-  document.getElementById('stars').textContent = stars;
-  const profileStars = document.getElementById('profileStars');
-  if(profileStars) profileStars.textContent = stars;
-  notifyStars(-5, 'Feed');
+function feedNagano(event) {
+  if (stars < 5) {
+    toast('Not enough stars! 🌟');
+    return;
+  }
 
-  const status = document.getElementById('feedStatus');
-  if(status) status.textContent = 'Nagano is enjoying the treat!';
+  // 1. 获取点击的按钮（Little Fish 卡片）
+  const btn = (event && event.currentTarget) || document.querySelector('.treat-card') || event.target;
 
-  const petMood = document.getElementById('petMood');
-  if(petMood) petMood.textContent = '“Yummy! Thank you, Joyce.”';
+  // 2. 准确定位界面上的 Nagano 小熊图片
+  // 优先查找图片标签，如果没有就找卡片里的 img
+  const bearImg = document.querySelector('.screen.active img') || 
+                  document.querySelector('.feed-screen img') || 
+                  document.querySelector('#feedScreen img') ||
+                  document.querySelector('.pet-avatar');
 
-  openModal(`
-    <div class="eyebrow">NAGANO'S LITTLE MOMENT</div>
-    <h3>🍽️ Nagano is eating!</h3>
-    <p>Nagano enjoyed the treat. Taking small care moments can help make recovery feel easier.</p>
-    <div class="modal-buttons"><button class="ok" onclick="closeModal()">Done</button></div>
-  `);
+  if (btn && bearImg) {
+    const btnRect = btn.getBoundingClientRect();
+    const bearRect = bearImg.getBoundingClientRect();
+
+    // 创建小鱼元素
+    const fish = document.createElement('div');
+    fish.className = 'flying-fish';
+    fish.innerText = '🐟';
+
+    // 计算起点（Little Fish 按钮中心）和终点（小熊中心）
+    const startX = btnRect.left + btnRect.width / 2 - 15;
+    const startY = btnRect.top + btnRect.height / 2 - 15;
+    const endX = bearRect.left + bearRect.width / 2 - 15;
+    const endY = bearRect.top + bearRect.height / 2 - 15;
+
+    // 设置小鱼初始位置
+    fish.style.left = `${startX}px`;
+    fish.style.top = `${startY}px`;
+    fish.style.opacity = '1';
+    fish.style.transform = 'scale(1.2)';
+    document.body.appendChild(fish);
+
+    // 触发飞行动画
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        fish.style.left = `${endX}px`;
+        fish.style.top = `${endY}px`;
+        fish.style.opacity = '0';
+        fish.style.transform = 'scale(0.5) rotate(-20deg)';
+      });
+    });
+
+    // 延迟 0.7 秒等小鱼飞到小熊嘴里后：移除小鱼，小熊震动/缩小吃掉，再弹出提示框
+    setTimeout(() => {
+      fish.remove();
+      
+      // 让小熊播放吃东西的动效
+      bearImg.classList.remove('eating-anim');
+      void bearImg.offsetWidth; // 刷新动画
+      bearImg.classList.add('eating-anim');
+
+      // 扣除星星
+      stars -= 5;
+      const starsEl = document.getElementById('stars');
+      const profileStars = document.getElementById('profileStars');
+      if(starsEl) starsEl.textContent = stars;
+      if(profileStars) profileStars.textContent = stars;
+      notifyStars(-5, 'Feed Nagano');
+
+      const status = document.getElementById('feedStatus');
+      if(status) status.textContent = 'Nagano is enjoying the Little Fish! 🍣';
+
+      // 动画飞完后再弹窗，体验更好
+      openModal(`
+        <div class="eyebrow">NAGANO'S LITTLE MOMENT</div>
+        <h3>🍽️ Nagano is eating!</h3>
+        <p>You fed Nagano a Little Fish (-5 ★). Taking small care moments can help make recovery feel easier.</p>
+        <div class="modal-buttons"><button class="ok" onclick="closeModal()">Done</button></div>
+      `);
+    }, 700);
+  } else {
+    // 防错备用逻辑
+    stars -= 5;
+    toast('Fed Nagano! -5 ★');
+  }
 }
 
 function openSleep(){
@@ -311,7 +371,6 @@ function wakeUp(){
   sleepMode = false;
   document.body.classList.remove('sleeping');
 
-  // Prototype demo: record 7h, reward immediately, then return straight Home.
   const sleepDuration = '7h';
   const sleepStat = document.getElementById('sleepStat');
   if(sleepStat) sleepStat.textContent = sleepDuration;
@@ -332,7 +391,6 @@ function openDress(){
 }
 
 function selectOutfit(){
-  // All outfits are locked in this prototype.
   toast('This outfit is locked 🔒');
 }
 
@@ -575,7 +633,6 @@ function completeTask(taskId, checked){
   task.completed = checked;
   renderTasksForDate(selectedCalendarDate);
   if(checked){
-    // Completing a task earns 5 stars.
     stars += 5;
     document.getElementById('stars').textContent = stars;
     const profileStars = document.getElementById('profileStars');
@@ -630,7 +687,6 @@ function openRecoveryModal(){
 }
 
 function chooseRecovery(choice){
-  const task = activeTaskForRecovery;
   closeModal();
   openModal(`
     <div class="eyebrow">RECOVERY</div>
@@ -648,7 +704,6 @@ function rejectRecovery(){
 
 function finishRecovery(){
   activeTaskForRecovery = null;
-  // Completing a recovery action earns 5 stars.
   stars += 5;
   document.getElementById('stars').textContent = stars;
   const profileStars = document.getElementById('profileStars');
@@ -704,7 +759,6 @@ function moveTaskToDate(taskId, targetDate, dayName){
     if(index !== -1){ movedTask = list.splice(index,1)[0]; break; }
   }
   if(!movedTask){
-    // Demo-only task if the task is not in the current calendar dataset.
     const fallback = {
       'assignment-1': {id:'assignment-1',name:'Software Engineering Assignment',time:'No fixed time',stress:78,category:'school',completed:false},
       'party-1': {id:'party-1',name:'Birthday Party',time:'8:00 PM – 10:30 PM',stress:35,category:'social',completed:false},
@@ -721,7 +775,6 @@ function moveTaskToDate(taskId, targetDate, dayName){
   updateHomeWorkload();
   updateBurnoutMeter();
   toast(`Moved to ${dayName} ✓ Today's workload is now lighter.`);
-
 }
 
 function openWeeklyWorkload(){
@@ -833,7 +886,6 @@ function savePersonalityTest(){
   toast('Personality test updated ✓');
 }
 
-
 function toggleReminders(){
   const status=document.getElementById('reminderStatus');
   const toggle=document.getElementById('reminderToggle');
@@ -870,13 +922,14 @@ function shareProgress(){
 
 function toast(message){
   const t = document.getElementById('toast');
+  if(!t) return;
   t.textContent = message;
   t.classList.add('show');
   clearTimeout(window.toastTimer);
   window.toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-// Prototype behavior: simulate the system detecting a high workload once per browser session.
+// Session check and application startup
 window.addEventListener('load', () => {
   updateHomeWorkload();
   updateBurnoutMeter();
